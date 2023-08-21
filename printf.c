@@ -34,10 +34,11 @@ int print_char(char c)
 int _printf(const char *format, ...)
 {
 	int ch_print = 0;
-	int c;
-	char *str;
+
 	va_list ls_args;
 
+	if (format == NULL)
+		return (-1);
 	va_start(ls_args, format);
 	while (*format)
 	{
@@ -58,13 +59,11 @@ int _printf(const char *format, ...)
 			}
 			else if (*format == 'c')
 			{
-				c = va_arg(ls_args, int);
-				ch_print += print_char(c);
+				ch_print += print_char(va_arg(ls_args, int));
 			}
 			else if (*format == 's')
 			{
-				str = va_arg(ls_args, char*);
-				ch_print += print_str(str);
+				ch_print += print_str(va_arg(ls_args, char*));
 			}
 		}
 		format++;
