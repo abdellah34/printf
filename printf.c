@@ -1,30 +1,37 @@
 #include "main.h"
 /**
- * print_str - to write the string str to stdout
+ * print_str - writes the string str to stdout
  * @str: The string to print
- * Return:the count of characters.
+ * Return: On success 1.
+ * on error, -1 is returned, and errno is set appropriately.
  **/
 int print_str(char *str)
 {
-	int count = 0;
-
-	while (*str)
-	{
-		putchar(*str);
-		str++;
-		count++;
-	}
-	return (count);
+		return (write(1, str, strlen(str)));
 }
 /**
- * print_char - to write the character.
- * @c: The charactr to print
- * Return: 1.
+ * null_format - writes the string str to stdout
+ * @str: The string to print
+ * Return: On success 1.
+ * on error, -1 is returned, and errno is set appropriately.
  **/
-int print_char(char c)
+int null_format(const char *str)
 {
-	putchar(c);
-	return (1);
+	if (str == NULL)
+		return (-1);
+	return (0);
+}
+/**
+ * print_notpercent - writes the string str to stdout
+ * @str: The string to print
+ * Return: On success 1.
+ * on error, -1 is returned, and errno is set appropriately.
+ **/
+int print_notpercent(const char *str)
+{
+	if (*str != '%')
+		return (write(1, str, 1));
+	return (0);
 }
 /**
  * _printf - converts formats, and prints its arguments .
@@ -34,18 +41,15 @@ int print_char(char c)
 int _printf(const char *format, ...)
 {
 	int ch_print = 0;
-
+	char c, *str;
 	va_list ls_args;
 
-	if (format == NULL)
-		return (-1);
+	null_format(format);
 	va_start(ls_args, format);
 	while (*format)
 	{
-		if (*format != '%')
-		{
-			ch_print += print_char(*format);
-		}
+		if (print_notpercent(format))
+			ch_print++;
 		else
 		{
 			format++;
@@ -55,15 +59,20 @@ int _printf(const char *format, ...)
 			}
 			if (*format == '%')
 			{
-				ch_print += print_char('%');
+				write(1, format, 1);
+				ch_print++;
 			}
 			else if (*format == 'c')
 			{
-				ch_print += print_char(va_arg(ls_args, int));
+				c = va_arg(ls_args, int);
+				write(1, &c, 1);
+				ch_print++;
 			}
 			else if (*format == 's')
 			{
-				ch_print += print_str(va_arg(ls_args, char*));
+				str = va_arg(ls_args, char*);
+				print_str(str);
+				ch_print += strlen(str);
 			}
 		}
 		format++;
