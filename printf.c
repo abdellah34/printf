@@ -50,21 +50,15 @@ int _printf(const char *format, ...)
 		{
 			format++;
 			if (*format == '\0')
-			{
 				break;
-			}
 			if (*format == '%')
-			{
 				ch_print += print_char('%');
-			}
+			else if (*format == '!')
+				ch_print += print_str("%!");
 			else if (*format == 'c')
-			{
 				ch_print += print_char(va_arg(ls_args, int));
-			}
 			else if (*format == 's')
-			{
 				ch_print += print_str(va_arg(ls_args, char*));
-			}
 		}
 		format++;
 	}
