@@ -74,6 +74,8 @@ int _printf(const char *format, ...)
 				print_str(str);
 				ch_print += strlen(str);
 			}
+			else
+				write(1, format, 1);
 		}
 		format++;
 	}
