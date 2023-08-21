@@ -16,7 +16,6 @@ int print_str(char *str)
 	}
 	return (count);
 }
-
 /**
  * print_char - to write the character.
  * @c: The charactr to print
@@ -24,10 +23,9 @@ int print_str(char *str)
  **/
 int print_char(char c)
 {
-        putchar(c);
-        return (1);
+	putchar(c);
+	return (1);
 }
-
 /**
  * _printf - converts formats, and prints its arguments .
  * @format: the format of string
@@ -39,9 +37,6 @@ int _printf(const char *format, ...)
 	int c;
 	char *str;
 	va_list ls_args;
-
-	if (format == NULL)
-		return (-1);
 
 	va_start(ls_args, format);
 	while (*format)
@@ -61,7 +56,8 @@ int _printf(const char *format, ...)
 			{
 				ch_print += print_char('%');
 			}
-			else if (*format == 'c'){
+			else if (*format == 'c')
+			{
 				c = va_arg(ls_args, int);
 				ch_print += print_char(c);
 			}
