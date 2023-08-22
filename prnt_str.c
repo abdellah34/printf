@@ -8,6 +8,17 @@ int print_str(char *str)
 {
 	int count = 0;
 
+	if (str == NULL)
+	{
+		putchar('(');
+		putchar('n');
+		putchar('u');
+		putchar('l');
+		putchar('l');
+		putchar(')');
+		return (0);
+	}
+
 	while (*str)
 	{
 		putchar(*str);

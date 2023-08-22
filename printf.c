@@ -1,46 +1,38 @@
 #include "main.h"
 /**
  * _printf - converts formats, and prints its arguments .
- * @format: the format of string
+ * @format: the format of data
  * Return: the number of characters printed.
  */
 int _printf(const char *format, ...)
 {
-	int ch_print = 0;
-	char *str;
+	va_list args;
+	int ch_prntd = 0;
 
-	va_list ls_args;
+	va_start(args, format);
 
-	if (format == NULL)
+	if (!format)
 		return (-1);
-	va_start(ls_args, format);
-	while (*format)
+	while (*format != '\0')
 	{
 		if (*format != '%')
-		{
-			ch_print += print_char(*format);
-		}
+			ch_prntd += print_char(*format);
 		else
 		{
 			format++;
-			if (*format == '\0')
-				return (-1);
-			if (*format == '%')
-				ch_print += print_char('%');
-			else if (*format == '!')
-				ch_print += print_str("%!");
-			else if (*format == 'c')
-				ch_print += print_char(va_arg(ls_args, int));
+			if (*format == 'c')
+				ch_prntd += print_char(va_arg(args, int));
 			else if (*format == 's')
-			{
-				str = va_arg(ls_args, char*);
-				if (str == NULL)
-					print_str("(null)");
-				ch_print += print_str(va_arg(ls_args, char*));
-			}
+				ch_prntd += print_str(va_arg(args,char *));
+			else if (*format == '%')
+				ch_prntd += print_char('%');
+			else if (*format == '!')
+				ch_prntd += print_char('!');
+			else if (*format == '\0')
+				return (-1);
 		}
 		format++;
 	}
-	va_end(ls_args);
-	return (ch_print);
+	va_end(args);
+	return ch_prntd;
 }
