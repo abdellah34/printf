@@ -16,7 +16,7 @@ int print_str(char *str)
 		putchar('l');
 		putchar('l');
 		putchar(')');
-		return (0);
+		return (6);
 	}
 
 	while (*str)

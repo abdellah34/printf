@@ -20,16 +20,20 @@ int _printf(const char *format, ...)
 		else
 		{
 			format++;
+			if (*format == '\0' || (*format == ' ' && *(format + 1) == '\0'))
+				return (-1);
+
 			if (*format == 'c')
 				ch_prntd += print_char(va_arg(args, int));
 			else if (*format == 's')
 				ch_prntd += print_str(va_arg(args, char *));
 			else if (*format == '%')
 				ch_prntd += print_char('%');
-			else if (*format == '!')
-				ch_prntd += print_char('!');
-			else if (*format == '\0')
-				return (-1);
+			else
+			{
+				ch_prntd += print_char('%');
+				ch_prntd += print_char(*format);
+			}
 		}
 		format++;
 	}
