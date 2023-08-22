@@ -1,32 +1,5 @@
 #include "main.h"
 /**
- * print_str - to write the string str to stdout
- * @str: The string to print
- * Return:the count of characters.
- **/
-int print_str(char *str)
-{
-	int count = 0;
-
-	while (*str)
-	{
-		putchar(*str);
-		str++;
-		count++;
-	}
-	return (count);
-}
-/**
- * print_char - to write the character.
- * @c: The charactr to print
- * Return: 1.
- **/
-int print_char(char c)
-{
-	putchar(c);
-	return (1);
-}
-/**
  * _printf - converts formats, and prints its arguments .
  * @format: the format of string
  * Return: the number of characters printed.
@@ -34,6 +7,7 @@ int print_char(char c)
 int _printf(const char *format, ...)
 {
 	int ch_print = 0;
+	char *str;
 
 	va_list ls_args;
 
@@ -50,7 +24,7 @@ int _printf(const char *format, ...)
 		{
 			format++;
 			if (*format == '\0')
-				break;
+				return (-1);
 			if (*format == '%')
 				ch_print += print_char('%');
 			else if (*format == '!')
@@ -58,7 +32,12 @@ int _printf(const char *format, ...)
 			else if (*format == 'c')
 				ch_print += print_char(va_arg(ls_args, int));
 			else if (*format == 's')
+			{
+				str = va_arg(ls_args, char*);
+				if (str == NULL)
+					print_str("(null)");
 				ch_print += print_str(va_arg(ls_args, char*));
+			}
 		}
 		format++;
 	}
