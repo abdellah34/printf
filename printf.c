@@ -25,6 +25,8 @@ int _printf(const char *format, ...)
 
 			if (*format == 'c')
 				ch_prntd += print_char(va_arg(args, int));
+			else if (*format == 'd' || *format == 'i')
+				ch_prntd += print_int(va_arg(args, int));
 			else if (*format == 's')
 				ch_prntd += print_str(va_arg(args, char *));
 			else if (*format == '%')
