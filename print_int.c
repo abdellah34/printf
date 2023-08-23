@@ -8,6 +8,11 @@ int print_int (int n)
 {
 	int count = 0, i = 1, j = 0;
 
+	if (n == 0)
+	{
+		putchar(n + '0');
+		return (1);
+	}
 	if (n < 0)
 	{
 		putchar('-');
