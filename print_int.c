@@ -6,7 +6,7 @@
  */
 int print_int (int n)
 {
-	int count = 0, i = 1;
+	int count = 0, i = 1, j = 0;
 
 	if (n < 0)
 	{
@@ -14,14 +14,17 @@ int print_int (int n)
 		n = -n;
 	}
 	while (i <= n)
+	{
 		i *= 10;
-	while (n > 10)
+		j++;
+	}
+	while (j)
 	{
 		i = i / 10;
 		putchar(n / i + '0');
 		n = n - (n / i) * i;
 		count++;
+		j--;
 	}
-	putchar(n + '0');
 	return (count);
 }
