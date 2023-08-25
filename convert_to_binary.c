@@ -8,8 +8,14 @@
 int convert_to_binary(unsigned int a)
 {
 	unsigned int q = a;
-	int i = 0, count, tab[100];
+	int tab[64];
+	int i = 0, count;
 
+	if(a == 0 )
+	{
+		putchar('0');
+		return (1);
+	}
 	while (q >= 1)
 	{
 		tab[i] = q % 2;
