@@ -32,7 +32,7 @@ int _printf(const char *format, ...)
 			else if (*format == '%')
 				ch_prntd += print_char('%');
 			else if (*format == 'b')
-				ch_prntd = convert_to_binary(va_arg(args, int));
+				ch_prntd += convert_to_binary(va_arg(args, int));
 			else
 			{
 				ch_prntd += print_char('%');
