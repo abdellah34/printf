@@ -33,6 +33,8 @@ int _printf(const char *format, ...)
 				ch_prntd += print_char('%');
 			else if (*format == 'b')
 				ch_prntd += convert_to_binary(va_arg(args, int));
+			else if (*format == 'u')
+				ch_prntd += prnt_ui(va_arg(args, int));
 			else
 			{
 				ch_prntd += print_char('%');

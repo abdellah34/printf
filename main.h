@@ -10,4 +10,6 @@ int print_char(char c);
 int print_int (int n);
 int convert_to_binary(unsigned int a);
 int _printf(const char *format, ...);
+int prnt_ui (unsigned int n);
+
 #endif
